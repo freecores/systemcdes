@@ -45,7 +45,11 @@
 // CVS Revision History
 //
 // $Log: not supported by cvs2svn $
+// Revision 1.1.1.1  2004/07/05 17:31:16  jcastillo
+// First import
+//
 
+`timescale 10ns/1ns
 
 module desround(clk,reset,iteration_i,decrypt_i,R_i,L_i,Key_i,R_o,L_o,Key_o,s1_o,s2_o,s3_o,s4_o,s5_o,s6_o,s7_o,s8_o,s1_i,s2_i,s3_i,s4_i,s5_i,s6_i,s7_i,s8_i);
 
