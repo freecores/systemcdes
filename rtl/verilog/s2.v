@@ -45,6 +45,9 @@
 // CVS Revision History
 //
 // $Log: not supported by cvs2svn $
+// Revision 1.1.1.1  2004/07/05 17:31:17  jcastillo
+// First import
+//
 
 
 module s2(stage1_input,stage1_output);
@@ -52,7 +55,6 @@ input [5:0] stage1_input;
 output [3:0] stage1_output;
 
 reg [3:0] stage1_output;
-
 
 
 always @(  stage1_input)
@@ -126,8 +128,7 @@ begin
         62: stage1_output = (15); 
         63: stage1_output = (9); 
    
-endcase
-
+  endcase
 
 end
 

@@ -45,6 +45,9 @@
 // CVS Revision History
 //
 // $Log: not supported by cvs2svn $
+// Revision 1.1.1.1  2004/07/05 17:31:17  jcastillo
+// First import
+//
 
 
 module des(clk,reset,load_i,decrypt_i,data_i,key_i,data_o,ready_o);
@@ -122,19 +125,19 @@ begin
    if(!reset)
    begin
 
-	 ready_o = (0);
-	 data_o = (0);  
-	 stage1_iter = (0);
+     ready_o = (0);
+     data_o = (0);  
+     stage1_iter = (0);
      data_ready = (1);
    
    end
    else
    begin
 
-	 ready_o = (next_ready_o);
-	 data_o = (next_data_o);
-	 stage1_iter = (next_stage1_iter);
-	 data_ready = (next_data_ready);
+     ready_o = (next_ready_o);
+     data_o = (next_data_o);
+     stage1_iter = (next_stage1_iter);
+     data_ready = (next_data_ready);
    
    end
 end
@@ -144,8 +147,7 @@ always @(  data_i or   key_i or   load_i or   stage1_iter or   data_ready or sta
 
 begin
 
-   
-   
+      
    L_i_var=0;
    R_i_var=0;
    data_i_var=0;
@@ -248,34 +250,33 @@ begin
     
    case(stage1_iter)
 	
-  	   0:
-	   begin
-	   if(load_i)
-	   begin
-	 	   next_stage1_iter = (1);
-	       stage1_L_i = (L_i_var);
-	       stage1_R_i = (R_i_var);
-	       stage1_round_key_i = (key_var_perm);
-		   next_data_ready = (0);
-	   end
-	   else if (!data_ready)
-	   begin
-
-	       next_stage1_iter = (0);	
-		   next_ready_o = (1);
-           next_data_ready = (1);			 
-	   end
+     0:
+     begin
+       if(load_i)
+       begin
+         next_stage1_iter = (1);
+         stage1_L_i = (L_i_var);
+         stage1_R_i = (R_i_var);
+         stage1_round_key_i = (key_var_perm);
+         next_data_ready = (0);
        end
-       
-	   15:
-     	 next_stage1_iter = (0);
-       
-	   default:	
-	     next_stage1_iter = (stage1_iter+1);		 
-   
-endcase
- 
+       else if (!data_ready)
+       begin
 
+         next_stage1_iter = (0);	
+         next_ready_o = (1);
+         next_data_ready = (1);			 
+       end
+	 end
+       
+     15:
+       next_stage1_iter = (0);
+       
+     default:	
+       next_stage1_iter = (stage1_iter+1);		 
+   
+   endcase
+ 
 end
 
 endmodule
