@@ -43,6 +43,9 @@
 // CVS Revision History
 //
 // $Log: not supported by cvs2svn $
+// Revision 1.2  2004/08/30 16:55:54  jcastillo
+// Used indent command on C code
+//
 // Revision 1.1.1.1  2004/07/05 17:31:17  jcastillo
 // First import
 //
@@ -75,7 +78,6 @@ key_gen::generate_key ()
 	case 1:
 	case 8:
 	case 15:
-	  //Rotate left one 
 	  semi_key = prev_key_var.range (55, 28);
 	  prev0 = semi_key[27];
 	  semi_key = semi_key << 1;
@@ -88,7 +90,6 @@ key_gen::generate_key ()
 	  non_perm_key_var.range (27, 0) = semi_key;
 	  break;
 	default:
-	  //Rotate left two
 	  semi_key = prev_key_var.range (55, 28);
 	  prev0 = semi_key[27];
 	  prev1 = semi_key[26];
@@ -119,7 +120,6 @@ key_gen::generate_key ()
 	case 1:
 	case 8:
 	case 15:
-	  //Rotate rigth one 
 	  semi_key = prev_key_var.range (55, 28);
 	  prev0 = semi_key[0];
 	  semi_key = semi_key >> 1;
@@ -132,7 +132,6 @@ key_gen::generate_key ()
 	  non_perm_key_var.range (27, 0) = semi_key;
 	  break;
 	default:
-	  //Rotate left two
 	  semi_key = prev_key_var.range (55, 28);
 	  prev0 = semi_key[0];
 	  prev1 = semi_key[1];
