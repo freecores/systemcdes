@@ -44,6 +44,9 @@
 // CVS Revision History
 //
 // $Log: not supported by cvs2svn $
+// Revision 1.1.1.1  2004/07/05 17:31:18  jcastillo
+// First import
+//
 
 `timescale 10ns/1ns
 
@@ -93,8 +96,8 @@ des d1(clk,reset,load_i,decrypt_i,data_i,key_i,data_o,ready_o);
 	
 	//Encrypt
 	x[ZZZ]=192'h0123456789ABCDEF_0000000000000000_D5D44FF720683D0D; ZZZ=ZZZ+1;
-    x[ZZZ]=192'h0000000000000000_123456789ABCDEF0_9D2A73F6A9070648; ZZZ=ZZZ+1;
-    x[ZZZ]=192'h23FE536344578A49_123456789ABCDEF0_1862EC2AA88BA258; ZZZ=ZZZ+1;
+      x[ZZZ]=192'h0000000000000000_123456789ABCDEF0_9D2A73F6A9070648; ZZZ=ZZZ+1;
+      x[ZZZ]=192'h23FE536344578A49_123456789ABCDEF0_1862EC2AA88BA258; ZZZ=ZZZ+1;
 
 	
 	for(select=0;select<ZZZ;select=select+1)
@@ -106,9 +109,9 @@ des d1(clk,reset,load_i,decrypt_i,data_i,key_i,data_o,ready_o);
 	   tmp=x[select];
 	   key_i=tmp[191:128];
 	   data_i=tmp[127:64];
-	   load_i = 1'b1;
+	   load_i = #1 1'b1;
 	   @(posedge clk);
-	   load_i = 1'b0;
+	   load_i = #1 1'b0;
 	   
        while(!ready_o)	@(posedge clk);
 	   //$display("Got %x", data_o);
