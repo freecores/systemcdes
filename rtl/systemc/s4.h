@@ -43,20 +43,25 @@
 // CVS Revision History
 //
 // $Log: not supported by cvs2svn $
+// Revision 1.1.1.1  2004/07/05 17:31:17  jcastillo
+// First import
+//
 
 #include "systemc.h"
 
-SC_MODULE(s4){
-		
-	sc_in<sc_uint<6> > stage1_input;
-	sc_out<sc_uint<4> > stage1_output;
-	
-	void s4_box();
-	
-	
-	SC_CTOR(s4){
-		
-	    SC_METHOD(s4_box);
-   	    sensitive << stage1_input;
-	}
+SC_MODULE (s4)
+{
+
+  sc_in < sc_uint < 6 > >stage1_input;
+  sc_out < sc_uint < 4 > >stage1_output;
+
+  void s4_box ();
+
+
+  SC_CTOR (s4)
+  {
+
+    SC_METHOD (s4_box);
+    sensitive << stage1_input;
+  }
 };

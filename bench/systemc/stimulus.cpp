@@ -43,41 +43,53 @@
 // CVS Revision History
 //
 // $Log: not supported by cvs2svn $
+// Revision 1.2  2004/08/30 16:55:54  jcastillo
+// Used indent command on C code
+//
+// Revision 1.1.1.1  2004/07/05 17:31:18  jcastillo
+// First import
+//
 
 
 
 
-#include "stimulus.h"  
+#include "stimulus.h"
 
-void test::tb(){
-  
-  sc_uint<64> des_key_var,des_data_var;
+void
+test::tb ()
+{
+
+  sc_uint < 64 > des_key_var, des_data_var;
   bool decrypt_var;
-   
-  scv_random::set_global_seed(53246);
-  
-  random_generator rg("random_generator");	
- 	
-  transactor->resetea();
-	
-  while(1){
-    
-	rg.des_key->next();
-	rg.des_data->next();
-	rg.decrypt->next();	  
-	
-	  
-	des_data_var=*(rg.des_data);
-	des_key_var=*(rg.des_key);
-    decrypt_var=*(rg.decrypt);
-			  
-	if(!decrypt_var){
-	  cout << "Encrypt: 0x"  << (int)des_data_var.range(63,32) << (int)des_data_var.range(31,0) << " 0x" << (int)des_key_var.range(63,32) << (int)des_key_var.range(31,0) << " " << sc_time_stamp() << endl;	  
-	  transactor->encrypt(des_data_var,des_key_var);
-	}else{
-	  cout << "Decrypt: 0x"  << (int)des_data_var.range(63,32) << (int)des_data_var.range(31,0) << " 0x" << (int)des_key_var.range(63,32) << (int)des_key_var.range(31,0) << " " << sc_time_stamp() << endl;	  
-	  transactor->decrypt(des_data_var,des_key_var);	  
+
+  scv_random::set_global_seed (53246);
+
+  random_generator rg ("random_generator");
+
+  transactor->resetea ();
+
+  while (1)
+    {
+
+      rg.des_key->next ();
+      rg.des_data->next ();
+      rg.decrypt->next ();
+
+
+      des_data_var = *(rg.des_data);
+      des_key_var = *(rg.des_key);
+      decrypt_var = *(rg.decrypt);
+
+      if (!decrypt_var)
+	{
+	  cout << "Encrypt: 0x" << (int) des_data_var.range (63,32) << (int)des_data_var.range (31,0) << " 0x" << (int) des_key_var.range (63,32) << (int) des_key_var.range (31,0) << " " << sc_time_stamp () << endl;
+	  transactor->encrypt (des_data_var, des_key_var);
 	}
-  }	
-	
+      else
+	{
+	  cout << "Decrypt: 0x" << (int) des_data_var.range (63,32) << (int)des_data_var.range (31,0) << " 0x" << (int) des_key_var.range (63,32) << (int) des_key_var.range (31,0) << " " << sc_time_stamp () << endl;
+	  transactor->decrypt (des_data_var, des_key_var);
+	}
+    }
+
 }

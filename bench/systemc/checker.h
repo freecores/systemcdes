@@ -44,38 +44,53 @@
 // CVS Revision History
 //
 // $Log: not supported by cvs2svn $
+// Revision 1.2  2004/08/30 16:55:54  jcastillo
+// Used indent command on C code
+//
+// Revision 1.1.1.1  2004/07/05 17:31:18  jcastillo
+// First import
+//
 
 
 #include "systemc.h"
 
-SC_MODULE(checker){
-	
-	sc_in<bool> reset;
-	
-	sc_fifo_in<sc_uint<64> > rt_des_data_i;
-	sc_fifo_in<sc_uint<64> > c_des_data_i;
-		
-	void check(){
-	 sc_uint<64> rt_data_var,c_data_var;
-	
-	  wait(reset->posedge_event());
-		
-	  while(1){
-		  if(reset.read()){
-		   rt_data_var=rt_des_data_i.read(); 
-		   c_data_var=c_des_data_i.read();   
-		   if(rt_data_var!=c_data_var){
-			 cout << "Simulation mismatch: 0x"  << (int)rt_data_var.range(63,32) << (int)rt_data_var.range(31,0) << " 0x" << (int)c_data_var.range(63,32) << (int)c_data_var.range(31,0) << " " << sc_time_stamp() << endl;	  
-			 exit(0);
-		   }else{
-			 cout << "OK: 0x"  << (int)rt_data_var.range(63,32) << (int)rt_data_var.range(31,0) << " 0x" << (int)c_data_var.range(63,32) << (int)c_data_var.range(31,0) << " " << sc_time_stamp() << endl;	  
-		   }
-	      }else
-		     wait(reset->posedge_event());
-	  }  	
-   }
-	
-	 SC_CTOR(checker){
-	      SC_THREAD(check);
-     }
- };
+SC_MODULE (checker)
+{
+
+  sc_in < bool > reset;
+
+  sc_fifo_in < sc_uint < 64 > >rt_des_data_i;
+  sc_fifo_in < sc_uint < 64 > >c_des_data_i;
+
+  void check ()
+  {
+    sc_uint < 64 > rt_data_var, c_data_var;
+
+    wait (reset->posedge_event ());
+
+    while (1)
+      {
+	if (reset.read ())
+	  {
+	    rt_data_var = rt_des_data_i.read ();
+	    c_data_var = c_des_data_i.read ();
+	    if (rt_data_var != c_data_var)
+	      {
+		cout << "Simulation mismatch: 0x" << (int) rt_data_var.range (63, 32) << (int) rt_data_var.range (31,0) << " 0x" << (int) c_data_var.range (63,32) << (int) c_data_var.range (31,0) <<" " << sc_time_stamp () << endl;
+		exit (0);
+	      }
+	    else
+	      {
+		cout << "OK: 0x" << (int) rt_data_var.range (63,32) << (int)rt_data_var.range (31,0) << " 0x" << (int) c_data_var.range (63, 32) << (int) c_data_var.range (31,0) << " " << sc_time_stamp () << endl;
+	      }
+	  }
+	else
+	  wait (reset->posedge_event ());
+      }
+  }
+
+  SC_CTOR (checker)
+  {
+    SC_THREAD (check);
+  }
+};

@@ -40,28 +40,38 @@
 // CVS Revision History
 //
 // $Log: not supported by cvs2svn $
+// Revision 1.2  2004/08/30 16:55:54  jcastillo
+// Used indent command on C code
+//
+// Revision 1.1.1.1  2004/07/05 17:31:18  jcastillo
+// First import
+//
 
 #include "systemc.h"
 
-SC_MODULE(adapter){
-	
-	sc_in<bool> clk;
-	sc_in<bool> rt_ready_i;
-	sc_in<sc_uint<64> > rt_des_data_i;
-	
-	sc_fifo_out<sc_uint<64> > rt_des_data_o;
-		
-	void adapt(){
-	 
-	  while(1){
-		 wait(clk->posedge_event());
-		    if(rt_ready_i.read())
-		        rt_des_data_o.write(rt_des_data_i.read());
-	   }
-		
-   }
-	
-	 SC_CTOR(adapter){
-	      SC_THREAD(adapt);
-     }
- };
+SC_MODULE (adapter)
+{
+
+  sc_in < bool > clk;
+  sc_in < bool > rt_ready_i;
+  sc_in < sc_uint < 64 > >rt_des_data_i;
+
+  sc_fifo_out < sc_uint < 64 > >rt_des_data_o;
+
+  void adapt ()
+  {
+
+    while (1)
+      {
+	wait (clk->posedge_event ());
+	if (rt_ready_i.read ())
+	  rt_des_data_o.write (rt_des_data_i.read ());
+      }
+
+  }
+
+  SC_CTOR (adapter)
+  {
+    SC_THREAD (adapt);
+  }
+};
